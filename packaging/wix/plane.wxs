@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- WiX v4+/v5/v7 authoring. Builds a per-user MSI that installs plane.exe
+     and adds its folder to the user PATH (no admin required). -->
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Package Name="plane CLI"
+           Manufacturer="plane-cli"
+           Version="1.0.0.0"
+           UpgradeCode="7e3a1c2d-5b4f-4e9a-9c1a-2f6b8d0e1a23"
+           Scope="perUser">
+
+    <MajorUpgrade DowngradeErrorMessage="A newer version of plane CLI is already installed." />
+    <MediaTemplate EmbedCab="yes" />
+
+    <StandardDirectory Id="LocalAppDataFolder">
+      <Directory Id="INSTALLFOLDER" Name="plane">
+        <Component Id="PlaneExe" Guid="*">
+          <File Id="planeexe" Name="plane.exe" Source="plane-windows-x64.exe" KeyPath="yes" />
+          <Environment Id="PlanePath" Name="PATH" Value="[INSTALLFOLDER]"
+                       Part="last" Action="set" Permanent="no" System="no" />
+        </Component>
+      </Directory>
+    </StandardDirectory>
+
+    <Feature Id="Main" Title="plane CLI" Level="1">
+      <ComponentRef Id="PlaneExe" />
+    </Feature>
+  </Package>
+</Wix>

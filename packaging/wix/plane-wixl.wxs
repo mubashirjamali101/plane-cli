@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- WiX v3 schema for msitools' `wixl` (builds a real .msi on macOS/Linux).
+     Per-user install of plane.exe to %LOCALAPPDATA%\plane, added to the user PATH. -->
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product Id="*" Name="plane CLI" Language="1033" Version="1.0.0.0"
+           Manufacturer="plane-cli" UpgradeCode="7E3A1C2D-5B4F-4E9A-9C1A-2F6B8D0E1A23">
+    <Package InstallerVersion="200" Compressed="yes" InstallScope="perUser"
+             Comments="Plane project management CLI" />
+    <Media Id="1" Cabinet="plane.cab" EmbedCab="yes" />
+
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="LocalAppDataFolder">
+        <Directory Id="INSTALLFOLDER" Name="plane">
+          <Component Id="PlaneExe" Guid="A1B2C3D4-1111-2222-3333-444455556666">
+            <File Id="planeexe" Name="plane.exe" Source="dist/plane-windows-x64.exe" KeyPath="yes" />
+            <Environment Id="PlanePath" Name="PATH" Value="[INSTALLFOLDER]"
+                         Part="last" Action="set" Permanent="no" System="no" />
+          </Component>
+        </Directory>
+      </Directory>
+    </Directory>
+
+    <Feature Id="Main" Level="1">
+      <ComponentRef Id="PlaneExe" />
+    </Feature>
+  </Product>
+</Wix>

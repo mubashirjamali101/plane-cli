@@ -1,0 +1,18 @@
+# Copy to .planerc (this directory tree) or ~/.planerc (global) and edit.
+# Each setting resolves on its own: environment variable > nearest .planerc > ~/.planerc.
+#
+# NEVER commit a .planerc containing an api_key — .gitignore excludes .planerc for this reason.
+# Keep credentials in ~/.planerc and let each repository's .planerc set only the project.
+
+# --- credentials (belong in ~/.planerc) ---
+# api_key=plane_api_...
+# workspace=your-workspace
+# base_url=https://your-plane-instance.example/api/v1
+
+# --- per-repository ---
+# Default project, so `project=<uuid>` can be omitted. `plane projects list` prints the UUIDs.
+# A bare UUID on its own line means the same thing.
+# project=00000000-0000-0000-0000-000000000000
+
+# Default `items list` filter. Unset means every state.
+# default_states=Todo,In Progress

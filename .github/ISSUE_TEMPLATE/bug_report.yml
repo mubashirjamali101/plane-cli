@@ -1,0 +1,107 @@
+name: Bug report
+description: Something the CLI does wrong, or does not do at all
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the report. Before you fill this in, please **redact your API key** from
+        anything you paste — commands, config, and error output can all contain it.
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What did you expect, and what did you get instead?
+      placeholder: |
+        I expected `items list --state=Done` to show the finished items.
+        It printed "No work items found." even though the web app shows 12.
+    validations:
+      required: true
+
+  - type: textarea
+    id: command
+    attributes:
+      label: The command you ran
+      description: >
+        The exact command, and the output — including the error, if there was one.
+        Replace your API key and anything confidential with `<redacted>`.
+      render: console
+      placeholder: |
+        $ plane items list --state=Done
+        Error: state 'Done' not found. Available: Backlog, Todo, In Progress, Completed
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: plane version
+      description: The output of `plane --version`.
+      placeholder: "1.0.0"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: install
+    attributes:
+      label: How did you install it?
+      options:
+        - Release binary
+        - Native installer (.pkg / .dmg / .msi / .AppImage)
+        - Built from source with Bun
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating system
+      options:
+        - macOS (Apple Silicon)
+        - macOS (Intel)
+        - Linux (x64)
+        - Linux (arm64)
+        - Windows
+    validations:
+      required: true
+
+  - type: dropdown
+    id: instance
+    attributes:
+      label: Plane instance
+      options:
+        - Plane Cloud
+        - Self-hosted
+    validations:
+      required: true
+
+  - type: input
+    id: plane-version
+    attributes:
+      label: Plane version
+      description: For a self-hosted instance, the version you are running. Leave blank for Cloud.
+      placeholder: "v0.24"
+
+  - type: textarea
+    id: config
+    attributes:
+      label: Relevant configuration
+      description: >
+        Anything from your `.planerc` that might matter — `default_states`, whether the
+        project comes from a file or `project=<uuid>`. **Never paste `api_key`.**
+      render: ini
+      placeholder: |
+        project=<uuid>
+        default_states=Todo,In Progress
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting
+      options:
+        - label: I have removed my API key and any confidential ticket content from this report.
+          required: true
+        - label: I checked that this is not already reported in an open issue.
+          required: true

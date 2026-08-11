@@ -1,0 +1,28 @@
+# Compiled binaries and installers
+/plane
+/plane.exe
+/dist/
+/build/
+
+# Bun / Node
+node_modules/
+*.bun-build
+.*.bun-build
+bun.lockb
+
+# Local configuration — may contain an API key
+.planerc
+
+# Per-directory CLI state: exports, downloads and history
+.plane/
+
+# OS and editor noise
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+__pycache__/
+
+# Claude Code local settings
+.claude/settings.local.json

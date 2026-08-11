@@ -1,0 +1,52 @@
+name: Feature request
+description: A command, flag, or behaviour the CLI is missing
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Check `plane --help` and the command reference in `CLI_DOCS.md` first — the CLI
+        covers more than the README shows.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What are you trying to do?
+      description: >
+        Describe the task, not the solution. Knowing the underlying goal often surfaces a
+        better answer than the flag you had in mind — or one that already exists.
+      placeholder: >
+        I triage bugs every morning and want the ones assigned to me that changed since
+        yesterday. Today I list everything and filter by eye.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What would you like it to look like?
+      description: The command as you would want to type it.
+      render: console
+      placeholder: |
+        $ plane items list --assignee=me --updated-since=1d
+    validations:
+      required: true
+
+  - type: textarea
+    id: workaround
+    attributes:
+      label: How do you handle it today?
+      description: A workaround, however ugly. It helps judge how much the gap costs.
+      placeholder: "plane items list --output=json | jq '...'"
+
+  - type: dropdown
+    id: scope
+    attributes:
+      label: Does the Plane API already support this?
+      description: If you know, it saves a round trip. "Not sure" is a fine answer.
+      options:
+        - "Yes — the API exposes it"
+        - "No — it would have to be done client-side"
+        - "Not sure"
+    validations:
+      required: true

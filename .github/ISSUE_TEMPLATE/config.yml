@@ -1,0 +1,10 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Project home and contact
+    url: https://mubashirjamali.com
+    about: >-
+      The maintainer. Security issues and code-of-conduct reports go privately to
+      planecli@mubashirjamali.com — never a public issue.
+  - name: Plane's own issue tracker
+    url: https://github.com/makeplane/plane/issues
+    about: For bugs in Plane itself or its API, rather than in this CLI.
