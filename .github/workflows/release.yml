@@ -16,7 +16,7 @@ jobs:
   release:
     runs-on: macos-latest # macOS can produce every artifact, including the universal .pkg/.dmg
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - uses: oven-sh/setup-bun@v2
         with:
