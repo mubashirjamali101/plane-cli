@@ -33,7 +33,9 @@ export function ensureStateDir(...segments: string[]): string {
 export function displayPath(path: string): string {
   const fromHere = relative(process.cwd(), path);
   if (!fromHere || fromHere.startsWith("..") || isAbsolute(fromHere)) return path;
-  return fromHere;
+  // Forward slashes in user-facing paths stay readable on Windows and match every other
+  // platform; `path.relative` would otherwise leave backslashes in the message.
+  return fromHere.split("\\").join("/");
 }
 
 /** A filesystem-safe stamp for auto-named export files: `20260811-204155`. */

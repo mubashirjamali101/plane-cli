@@ -132,8 +132,10 @@ describe("history", () => {
   test("recording never throws, even with nowhere to write", () => {
     const dir = mkdtempSync(join(tmpdir(), "planero-"));
     created.push(dir);
+    // A file where `.plane/` must be a directory makes ensureStateDir fail on every OS.
+    // (Deleting the cwd works on Unix but fails with EBUSY on Windows.)
+    writeFileSync(join(dir, ".plane"), "not a directory");
     process.chdir(dir);
-    rmSync(dir, { recursive: true, force: true });
     expect(() => record(entry(["items", "list"]))).not.toThrow();
   });
 });
