@@ -1,15 +1,14 @@
 #!/usr/bin/env bash
-# plane-cli installer for macOS and Linux.
-# Makes the `plane` binary globally available on PATH.
+# Install plane CLI for macOS / Linux in one step.
 #
-#   ./install.sh                 # install from ./dist (after building)
-#   curl -fsSL <raw-url>/install.sh | bash   # download + install (set PLANE_DOWNLOAD_BASE)
+#   curl -fsSL https://raw.githubusercontent.com/mubashirjamali101/plane-cli/main/install.sh | bash
+#   ./install.sh                    # from a source checkout (uses ./dist if present)
 #
-# Env:
-#   PLANE_DOWNLOAD_BASE   Base URL hosting the dist binaries (enables curl|bash mode)
-#   PREFIX               Override install dir (default: /usr/local/bin, fallback ~/.local/bin)
+# Press Enter at the prompt to install, or Ctrl-C to cancel.
+# Env overrides: PREFIX, PLANE_REPO, PLANE_DOWNLOAD_BASE, PLANE_VERSION, YES=1 (skip prompt)
 set -euo pipefail
 
+REPO="${PLANE_REPO:-mubashirjamali101/plane-cli}"
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" 2>/dev/null && pwd || echo "")"
 
 os="$(uname -s)"
@@ -17,7 +16,7 @@ arch="$(uname -m)"
 case "$os" in
   Darwin) plat="macos" ;;
   Linux)  plat="linux" ;;
-  *) echo "Unsupported OS: $os (use install.ps1 on Windows)"; exit 1 ;;
+  *) echo "Unsupported OS: $os (on Windows use install.ps1)"; exit 1 ;;
 esac
 case "$arch" in
   arm64|aarch64) a="arm64" ;;
@@ -26,7 +25,6 @@ case "$arch" in
 esac
 bin="plane-${plat}-${a}"
 
-# Pick install dir: a writable PATH dir, preferring /usr/local/bin.
 choose_dir() {
   if [ -n "${PREFIX:-}" ]; then echo "$PREFIX"; return; fi
   if [ -w /usr/local/bin ] 2>/dev/null; then echo /usr/local/bin; return; fi
@@ -35,6 +33,16 @@ choose_dir() {
 }
 dest_dir="$(choose_dir)"
 dest="$dest_dir/plane"
+
+if [ -z "${YES:-}" ] && [ -t 0 ]; then
+  echo "Install plane CLI → $dest"
+  printf "Press Enter to continue (Ctrl-C to cancel)… "
+  read -r _
+elif [ -z "${YES:-}" ] && [ ! -t 0 ]; then
+  # Piped install (curl | bash): no TTY to press Enter on — proceed with a clear notice.
+  echo "Install plane CLI → $dest"
+fi
+
 mkdir -p "$dest_dir" 2>/dev/null || true
 
 tmp=""
@@ -43,19 +51,25 @@ if [ -n "$REPO_DIR" ] && [ -f "$REPO_DIR/dist/$bin" ]; then
   src="$REPO_DIR/dist/$bin"
 elif [ -n "$REPO_DIR" ] && [ -f "$REPO_DIR/plane" ] && [ "$plat" = "macos" ]; then
   src="$REPO_DIR/plane"
-elif [ -n "${PLANE_DOWNLOAD_BASE:-}" ]; then
-  tmp="$(mktemp)"
-  echo "Downloading ${PLANE_DOWNLOAD_BASE%/}/$bin ..."
-  curl -fsSL "${PLANE_DOWNLOAD_BASE%/}/$bin" -o "$tmp"
-  src="$tmp"
 else
-  echo "Could not find dist/$bin. Build first (./build.sh) or set PLANE_DOWNLOAD_BASE."
-  exit 1
+  base="${PLANE_DOWNLOAD_BASE:-}"
+  if [ -z "$base" ]; then
+    if [ -n "${PLANE_VERSION:-}" ]; then
+      base="https://github.com/${REPO}/releases/download/${PLANE_VERSION}"
+    else
+      base="https://github.com/${REPO}/releases/latest/download"
+    fi
+  fi
+  tmp="$(mktemp)"
+  url="${base%/}/$bin"
+  echo "Downloading $url …"
+  curl -fsSL "$url" -o "$tmp"
+  src="$tmp"
 fi
 
 install_cmd() { cp "$src" "$dest" && chmod +x "$dest"; }
 if ! install_cmd 2>/dev/null; then
-  echo "Writing to $dest_dir requires elevated permissions; using sudo."
+  echo "Need elevated permissions for $dest_dir — using sudo."
   sudo cp "$src" "$dest" && sudo chmod +x "$dest"
 fi
 [ -n "$tmp" ] && rm -f "$tmp"
@@ -63,8 +77,7 @@ fi
 echo "Installed: $dest"
 case ":$PATH:" in
   *":$dest_dir:"*) ;;
-  *) echo "NOTE: $dest_dir is not on PATH. Add this to your shell profile:"
-     echo "      export PATH=\"$dest_dir:\$PATH\"" ;;
+  *) echo "NOTE: add to your shell profile:  export PATH=\"$dest_dir:\$PATH\"" ;;
 esac
 
-"$dest" --help >/dev/null 2>&1 && echo "Verified: run 'plane --help' to get started." || true
+"$dest" --version 2>/dev/null && echo "Done. Try:  plane --help" || true

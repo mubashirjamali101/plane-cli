@@ -8,17 +8,19 @@ from a source checkout after `bun run build` or `./build.sh`.
 
 **macOS / Linux**
 ```bash
-./install.sh
-# or, after publishing binaries somewhere:
-#   curl -fsSL <base-url>/install.sh | PLANE_DOWNLOAD_BASE=<base-url> bash
+curl -fsSL https://raw.githubusercontent.com/mubashirjamali101/plane-cli/main/install.sh | bash
+# or from a source checkout after ./build.sh:
+#   ./install.sh
 ```
 Installs to `/usr/local/bin` (falls back to `~/.local/bin`), `chmod +x`, and verifies.
+Press Enter if prompted.
 
 **Windows (PowerShell)**
 ```powershell
-./install.ps1
+irm https://raw.githubusercontent.com/mubashirjamali101/plane-cli/main/install.ps1 | iex
+# or:  .\install.ps1
 ```
-Installs `plane.exe` to `%LOCALAPPDATA%\plane` and adds it to your user PATH.
+Installs `plane.exe` to `%LOCALAPPDATA%\Programs\plane` and adds it to your user PATH.
 
 After installing, configure the three settings and run `plane --help`:
 ```bash

@@ -38,16 +38,23 @@ for full credits.
 
 ## Install
 
-Download a binary for your platform from the [releases page](../../releases), or build
-from source:
+**macOS / Linux** — one line, press Enter if prompted:
 
 ```bash
-bun install && bun run build && ./install.sh
+curl -fsSL https://raw.githubusercontent.com/mubashirjamali101/plane-cli/main/install.sh | bash
 ```
 
-Or use a native installer: a **`.dmg`** for macOS (one per architecture), an **`.msi`**
-for Windows, and for Linux a **`.tar.gz`**, a **`.deb`** or an **`.AppImage`**. All of them,
-and how to build them, are described in [INSTALL.md](INSTALL.md).
+**Windows (PowerShell)**:
+
+```powershell
+irm https://raw.githubusercontent.com/mubashirjamali101/plane-cli/main/install.ps1 | iex
+```
+
+That downloads the right binary for your machine and puts `plane` on your `PATH`.
+
+Prefer a double-click installer? Grab a **`.dmg`** (macOS), **`.msi`** (Windows), or
+**`.deb` / `.AppImage`** (Linux) from the [releases page](../../releases). Details and
+building from source: [INSTALL.md](INSTALL.md).
 
 ## Configure
 
