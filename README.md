@@ -1,5 +1,7 @@
 # plane
 
+![Open Graph preview](docs/social.png)
+
 A fast, self-contained command-line client for [Plane](https://plane.so) — the open-source
 project manager. One binary, no runtime to install, and every command prints the commands
 you are likely to want next, with the real UUIDs already filled in.

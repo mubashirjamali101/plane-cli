@@ -2,7 +2,11 @@
 
 ## Reporting a vulnerability
 
-Please report security issues privately by email to **planecli@mubashirjamali.com**,
+Primary contact: **security@mubashirjamali.com**
+Product contact: **planecli@mubashirjamali.com**
+
+
+Please report security issues privately by email to **security@mubashirjamali.com** (or planecli@mubashirjamali.com),
 rather than opening a public issue. You should get an initial response within a week.
 GitHub's [private vulnerability reporting][gh-report] works equally well, if it is enabled
 on this repository.
