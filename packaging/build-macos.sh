@@ -45,7 +45,7 @@ build_one() {
   cp "$pkg" "$work/dmg/Install plane CLI.pkg"
   cat > "$work/dmg/README.txt" <<EOF
 plane ${VERSION} — command-line client for Plane
-Built by Mubashir Jamali — https://mubashirjamali.com
+Built by Mubashir Jamali — https://mubashirjamali.com/en/open-source/plane-cli
 
 This installer is for ${label} Macs.
 

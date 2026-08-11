@@ -9,7 +9,7 @@ import { version } from "../package.json";
 
 export const VERSION: string = version;
 export const AUTHOR = "Mubashir Jamali";
-export const AUTHOR_URL = "https://mubashirjamali.com";
+export const AUTHOR_URL = "https://mubashirjamali.com/en/open-source/plane-cli";
 export const CONTACT = "planecli@mubashirjamali.com";
 
 export const TAGLINE = "a command-line client for Plane project management";

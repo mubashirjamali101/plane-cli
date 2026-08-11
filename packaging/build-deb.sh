@@ -15,7 +15,7 @@ cd "$(dirname "$0")/.."
 
 VERSION="$(plane_version)"
 MAINTAINER="Mubashir Jamali <planecli@mubashirjamali.com>"
-HOMEPAGE="https://mubashirjamali.com"
+HOMEPAGE="https://mubashirjamali.com/en/open-source/plane-cli"
 
 build_one() {
   local arch="$1" binary="$2"      # arch is the Debian name: amd64 / arm64

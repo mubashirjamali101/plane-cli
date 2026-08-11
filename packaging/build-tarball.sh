@@ -27,7 +27,7 @@ build_one() {
 
   cat > "$stage/INSTALL.txt" <<EOF
 plane ${VERSION} — command-line client for Plane
-Built by Mubashir Jamali — https://mubashirjamali.com
+Built by Mubashir Jamali — https://mubashirjamali.com/en/open-source/plane-cli
 
 Install by putting the binary on your PATH, for example:
 

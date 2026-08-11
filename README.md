@@ -24,8 +24,15 @@ Work items (2)
 
 Works against Plane Cloud and any self-hosted instance.
 
-Built by [Mubashir Jamali](https://mubashirjamali.com) — sole developer. Run `plane about`
+Built by [Mubashir Jamali](https://mubashirjamali.com/en/open-source/plane-cli) — sole developer. Portfolio: [project page](https://mubashirjamali.com/en/open-source/plane-cli) · [writeup](https://mubashirjamali.com/en/writing/building-plane-cli-with-claude-code). Run `plane about`
 for full credits.
+
+
+## Screenshots
+
+![plane items list](docs/screenshots/items-list.png)
+
+![plane about](docs/screenshots/about.png)
 
 ## Install
 
@@ -208,7 +215,7 @@ which builds every binary and installer and attaches them to a GitHub release.
 
 ## Contact
 
-Built and maintained solo by [Mubashir Jamali](https://mubashirjamali.com). Security issues
+Built and maintained solo by [Mubashir Jamali](https://mubashirjamali.com/en/open-source/plane-cli). Security issues
 and code-of-conduct reports go privately to **planecli@mubashirjamali.com**; everything else
 belongs in an issue.
 
