@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "A fast, self-contained command-line client for Plane project management",
   "license": "MIT",
-  "homepage": "https://mubashirjamali.com/en/open-source/plane-cli",
+  "homepage": "https://www.mubashirjamali.com/en/open-source/plane-cli",
   "bugs": {
     "url": "https://github.com/mubashirjamali101/plane-cli/issues",
     "email": "security@mubashirjamali.com"
